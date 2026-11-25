@@ -13,7 +13,8 @@ def enqueue(inquiry):
     if inquiry.email:
         recipients.add(("email", inquiry.email, False))
     for contact in ManagerContact.objects.filter(notify=True):
-        recipients.add(("sms", contact.dial, True))
+        if contact.phone:
+            recipients.add(("sms", contact.dial, True))
         if contact.email:
             recipients.add(("email", contact.email, True))
     Notice.objects.bulk_create([

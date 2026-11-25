@@ -32,9 +32,10 @@ class Installation(models.Model):
         CLOSED = "closed", "بسته شد"
 
     class Topic(models.TextChoices):
-        INSTALL = "install", "نصب میز"
-        BUY = "buy", "مشاوره خرید"
-        OTHER = "other", "سایر پرسش‌ها"
+        INSTALL = "install", "نصب و فروش میز"
+        PRICE = "price", "استعلام قیمت"
+        REPAIR = "repair", "تعمیرات"
+        SUPPORT = "support", "پشتیبانی"
 
     topic = models.CharField("موضوع درخواست", max_length=10, choices=Topic.choices, default=Topic.INSTALL)
     email = models.EmailField("ایمیل (اختیاری)", blank=True)
@@ -56,10 +57,12 @@ class Installation(models.Model):
 
 class ManagerContact(models.Model):
     title = models.CharField("عنوان مسئول", max_length=60)
-    phone = models.CharField("شماره تماس عمومی", max_length=22, validators=[validate_phone])
+    phone = models.CharField("شماره تماس عمومی", max_length=22, blank=True, validators=[validate_phone])
+    telegram = models.URLField("لینک تلگرام", blank=True)
+    instagram = models.URLField("لینک Instagram", blank=True, help_text="اولین لینک اینستاگرام عمومی در سربرگ نمایش داده می‌شود.")
     email = models.EmailField("ایمیل دریافت اعلان (خصوصی)", blank=True)
     notify = models.BooleanField("دریافت اعلان درخواست جدید", default=True)
-    public = models.BooleanField("نمایش شماره در سایت", default=True)
+    public = models.BooleanField("نمایش راه‌های ارتباطی در سایت", default=True)
 
     @property
     def dial(self):

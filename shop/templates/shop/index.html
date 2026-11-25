@@ -1,10 +1,10 @@
 {% extends "shop/base.html" %}
 {% block content %}
 <section class="hero">
-<div class="shell hero-inner">
+<div class="cue-scene" aria-hidden="true"><i class="cue"></i><i class="cue second"></i><i class="game-ball eight">8</i><i class="game-ball amber">1</i></div><div class="shell hero-inner">
 <h1>مستر بیلیارد</h1>
 <p>میز بیلیارد، اسنوکر و لوازم بازی.<br>برای انتخاب میز و هماهنگی نصب با ما در تماس باشید.</p>
-<div class="actions"><a class="button" href="{% url 'tables' %}">مشاهده میزها ←</a><a class="outline" href="#installation">درخواست تماس</a></div>
+<div class="actions"><a class="button" href="{% url 'tables' %}">مشاهده میزها ←</a></div>
 </div>
 </section>
 <section class="shell section" id="catalog">
@@ -16,9 +16,10 @@
 </nav>
 {% include "shop/cards.html" %}
 </section>
+<section class="shell repair-strip"><div><h2>تعمیرات میز بیلیارد</h2><p>هموار کردن سطح بازی، بررسی باندها و تعویض ماهوت</p></div><a class="outline" href="{% url 'repairs' %}">مشاهده خدمات تعمیرات ←</a></section>
 <section class="shell section install" id="installation">
-<div class="install-copy"><h2>ارتباط با مدیران</h2><p>برای خرید یا نصب میز پیام بگذارید تا با شما تماس بگیریم. برای دریافت رسید ایمیلی، ایمیل خود را هم بنویسید.</p>{% for contact in contacts %}<p><a class="button" href="tel:{{ contact.dial }}">تماس با {{ contact.title }} · <bdi>{{ contact.dial }}</bdi></a></p>{% endfor %}<a class="outline" href="https://ig.me/m/mr.biliard">گفت‌وگو در دایرکت ↗</a></div>
-<form class="panel" method="post" action="{% url 'storefront' %}#installation">
+<div class="install-copy"><h2>راه‌های ارتباطی</h2><p>موضوع درخواست و شماره‌ات را بنویس تا برای هماهنگی با تو تماس بگیریم.</p></div>
+<div class="contact-column"><form class="panel" method="post" action="{% url 'storefront' %}#installation">
 {% csrf_token %}
 {% for message in messages %}<p class="notice" role="status">{{ message }}</p>{% endfor %}
 {% if invalid %}<p class="notice error" role="alert">لطفاً موارد مشخص‌شده را بررسی کنید.</p>{% endif %}
@@ -28,5 +29,11 @@
 {% endfor %}
 <button class="button" type="submit">ثبت درخواست تماس ←</button>
 </form>
+{% if contacts %}<div class="contact-list">{% for contact in contacts %}
+<div><strong>{{ contact.title }}</strong><div class="actions">
+{% if contact.phone %}<a href="tel:{{ contact.dial }}"><bdi>{{ contact.phone }}</bdi></a>{% endif %}
+{% if contact.telegram %}<a href="{{ contact.telegram }}">تلگرام</a>{% endif %}
+{% if contact.instagram %}<a href="{{ contact.instagram }}" lang="en">Instagram</a>{% endif %}
+</div></div>{% endfor %}</div>{% endif %}</div>
 </section>
 {% endblock %}

@@ -16,8 +16,8 @@
 <div>
 <small>{{ product.get_category_display }}</small><h1>{{ product.name }}</h1>
 <p>{{ product.description|linebreaksbr }}</p>
-<p>{% if product.price != None %}{{ product.price }} تومان{% else %}برای استعلام قیمت پیام دهید.{% endif %}</p>
-<div class="actions"><a class="button" href="https://ig.me/m/mr.biliard">استعلام در دایرکت ↗</a><a class="outline" href="{% url 'storefront' %}#installation">درخواست نصب</a></div>
+{% if product.price != None %}<p>{{ product.price }} تومان</p>{% endif %}
+<a class="button" href="{% url 'storefront' %}?topic=install#installation">استعلام قیمت ←</a>
 </div>
 </div>
 </section>

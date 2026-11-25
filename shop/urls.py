@@ -18,7 +18,10 @@ from .notifications import enqueue
 
 @require_http_methods(["GET", "POST"])
 def storefront(request):
-    form = InstallationForm(request.POST if request.method == "POST" else None)
+    selected = request.GET.get("topic", Installation.Topic.INSTALL)
+    if selected not in Installation.Topic.values:
+        selected = Installation.Topic.INSTALL
+    form = InstallationForm(request.POST if request.method == "POST" else None, initial={"topic": selected})
     if request.method == "POST" and form.is_valid():
         since = timezone.now() - timedelta(minutes=15)
         same_contact = Q(phone=form.cleaned_data["phone"])
@@ -50,7 +53,7 @@ def storefront(request):
 @require_GET
 def product_detail(request, pk):
     product = get_object_or_404(Product, pk=pk, published=True)
-    return render(request, "shop/product.html", {"product": product})
+    return render(request, "shop/product.html", {"product": product, "contact_topic": "install"})
 
 
 @require_GET
@@ -58,11 +61,17 @@ def catalog(request, tables):
     products = Product.objects.filter(published=True)
     products = (products.exclude(category="accessories") if tables else products.filter(category="accessories"))
     return render(request, "shop/catalog.html", {
-        "products": products, "title": "میزهای بیلیارد و اسنوکر" if tables else "سایر محصولات",
+        "products": products, "contact_topic": "install", "title": "میزهای بیلیارد و اسنوکر" if tables else "سایر محصولات",
     })
 
 
+@require_GET
+def repairs(request):
+    return render(request, "shop/repairs.html", {"contact_topic": "repair"})
+
+
 urlpatterns = [
+    path("repairs/", repairs, name="repairs"),
     path("tables/", catalog, {"tables": True}, name="tables"),
     path("accessories/", catalog, {"tables": False}, name="accessories"),
     path("", storefront, name="storefront"),
