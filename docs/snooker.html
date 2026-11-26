@@ -5,6 +5,8 @@
 <meta name="description" content="کاتالوگ مستر بیلیارد و ثبت درخواست مشاوره و نصب میز بیلیارد">
 <title>مستر بیلیارد | فروشگاه و نصب میز بیلیارد</title>
 <link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/showcase.css">
+<script defer src="assets/showcase.js"></script>
 </head>
 <body>
 <div class="loading" hidden role="status" aria-label="در حال بارگذاری"><i class="game-ball eight" aria-hidden="true">8</i></div>
@@ -22,13 +24,44 @@ setTimeout(hideLoader, 2500);
 <span class="outline social" lang="en">Instagram</span>
 </header>
 <main>
-<section class="hero">
-<div class="cue-scene" aria-hidden="true"><i class="cue"></i><i class="cue second"></i><i class="game-ball eight">8</i><i class="game-ball amber">1</i></div><div class="shell hero-inner">
-<h1>مستر بیلیارد</h1>
-<p>میز بیلیارد، اسنوکر و لوازم بازی.<br>برای انتخاب میز و هماهنگی نصب با ما در تماس باشید.</p>
-<div class="actions"><a class="button" href="tables.html">مشاهده میزها ←</a></div>
-</div>
+<section class="showcase" aria-label="مستر بیلیارد" data-showcase>
+  <div class="showcase-stage">
+    <article class="scene scene-table is-entering" id="scene-tables">
+      <div class="scene-art table-photo" aria-hidden="true"></div>
+      <div class="scene-copy">
+        <h1>مستر بیلیارد</h1>
+        <p>میزهای بیلیارد و اسنوکر را ببین و برای انتخاب میز مناسب فضای بازی‌ات مشاوره بگیر.</p>
+        <a class="button" href="tables.html">مشاهده میزها ←</a>
+      </div>
+    </article>
+    <article class="scene scene-gear" id="scene-gear" hidden>
+      <div class="scene-art gear-art" aria-hidden="true">
+        <div class="rack"><i class="sphere ball-nine"><b>9</b></i><i class="sphere ball-eight"><b>8</b></i><i class="sphere ball-three"><b>3</b></i></div>
+      </div>
+      <div class="scene-copy">
+        <h2>لوازم بازی</h2>
+        <p>برای انتخاب چوب، توپ و لوازم میز، کاتالوگ تجهیزات بازی را ببین.</p>
+        <a class="button" href="accessories.html">مشاهده لوازم ←</a>
+      </div>
+    </article>
+    <article class="scene scene-service" id="scene-repairs" hidden>
+      <div class="scene-art service-art" aria-hidden="true">
+        <div class="felt-detail"><i class="pocket-dot"></i><i class="shot-line"></i><i class="white-ball"></i><i class="shot-cue"></i></div>
+      </div>
+      <div class="scene-copy">
+        <h2>تعمیرات میز</h2>
+        <p>برای بررسی تراز میز، تعویض ماهوت یا تعمیر باند، مشکل میزت را با ما در میان بگذار.</p>
+        <a class="button" href="repairs.html">خدمات تعمیرات ←</a>
+      </div>
+    </article>
+  </div>
+  <div class="scene-controls" hidden aria-label="انتخاب نمای فروشگاه" role="group">
+    <button type="button" aria-controls="scene-tables" aria-pressed="true">میزها</button>
+    <button type="button" aria-controls="scene-gear" aria-pressed="false">لوازم بازی</button>
+    <button type="button" aria-controls="scene-repairs" aria-pressed="false">تعمیرات</button>
+  </div>
 </section>
+
 <section class="shell section" id="catalog">
 <h2>کاتالوگ فروشگاه</h2>
 <div class="departments"><a class="department" href="tables.html"><i class="game-ball amber" aria-hidden="true">1</i><b>میزهای بیلیارد و اسنوکر</b><span>←</span></a><a class="department" href="accessories.html"><i class="game-ball blue" aria-hidden="true">2</i><b>سایر محصولات</b><span>←</span></a></div>
