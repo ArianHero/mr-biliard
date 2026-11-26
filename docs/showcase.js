@@ -1,69 +1,53 @@
 (() => {
-  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const hero = document.querySelector("[data-showcase]");
-
-  if (hero) {
-    const stage = hero.querySelector(".showcase-stage");
-    const scenes = [...stage.querySelectorAll(".scene")];
-    const controls = hero.querySelector(".scene-controls");
-    const buttons = [...controls.querySelectorAll("button")];
-    let active = 0;
-    let touchStart;
-
-    function show(index) {
-      const next = (index + scenes.length) % scenes.length;
-      if (next === active) return;
-      scenes[active].hidden = true;
-      scenes[active].classList.remove("is-entering");
-      buttons[active].setAttribute("aria-pressed", "false");
-      active = next;
-      scenes[active].hidden = false;
-      scenes[active].classList.add("is-entering");
-      buttons[active].setAttribute("aria-pressed", "true");
-    }
-
-    controls.hidden = false;
-    buttons.forEach((button, index) => button.addEventListener("click", () => show(index)));
-    controls.addEventListener("keydown", event => {
-      if (!["ArrowLeft", "ArrowRight"].includes(event.key)) return;
-      event.preventDefault();
-      show(active + (event.key === "ArrowLeft" ? 1 : -1));
-      buttons[active].focus();
-    });
-    stage.addEventListener("touchstart", event => {
-      touchStart = event.touches.length === 1 ? event.touches[0] : null;
-    }, {passive:true});
-    stage.addEventListener("touchcancel", () => { touchStart = null; });
-    stage.addEventListener("touchend", event => {
-      if (!touchStart) return;
-      const dx = event.changedTouches[0].clientX - touchStart.clientX;
-      const dy = event.changedTouches[0].clientY - touchStart.clientY;
-      touchStart = null;
-      if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.5) show(active + (dx > 0 ? 1 : -1));
-    }, {passive:true});
-
-    stage.addEventListener("pointermove", event => {
-      if (event.pointerType !== "mouse" || reducedMotion.matches) return;
-      const bounds = stage.getBoundingClientRect();
-      const x = (event.clientX - bounds.left) / bounds.width - .5;
-      const y = (event.clientY - bounds.top) / bounds.height - .5;
-      hero.style.setProperty("--pointer-x", (x * 16) + "px");
-      hero.style.setProperty("--pointer-y", (y * 12) + "px");
-    });
-    stage.addEventListener("pointerleave", () => {
-      hero.style.removeProperty("--pointer-x");
-      hero.style.removeProperty("--pointer-y");
-    });
+  const oldContact = document.querySelector(".legacy-contact");
+  if (oldContact && location.hash === "#installation") {
+    location.replace(oldContact.href);
+    return;
   }
 
-  if ("IntersectionObserver" in window && !reducedMotion.matches) {
-    const observer = new IntersectionObserver(entries => {
-      for (const entry of entries) {
-        if (!entry.isIntersecting) continue;
-        entry.target.classList.add("motion-reveal");
-        observer.unobserve(entry.target);
-      }
-    }, {threshold:.12});
-    document.querySelectorAll(".department, .card, .repair-strip, .repair-content dl").forEach(el => observer.observe(el));
+  const loader = document.querySelector(".loading");
+  if (loader && document.readyState !== "complete") {
+    const timer = setTimeout(() => { loader.hidden = false; }, 420);
+    const done = () => { clearTimeout(timer); loader.hidden = true; };
+    window.addEventListener("load", done, {once: true});
+    window.addEventListener("pageshow", done, {once: true});
+    setTimeout(done, 2400);
   }
+
+  const gallery = document.querySelector("[data-gallery]");
+  if (!gallery) return;
+  const frame = gallery.querySelector(".gallery-frame");
+  const photos = [...frame.querySelectorAll("img")];
+  const controls = gallery.querySelector(".gallery-controls");
+  const buttons = [...controls.querySelectorAll("button")];
+  const caption = gallery.querySelector(".gallery-caption");
+  let active = 0;
+  let start;
+  function select(index) {
+    active = (index + photos.length) % photos.length;
+    photos.forEach((photo, n) => {
+      photo.hidden = n !== active;
+      buttons[n].setAttribute("aria-pressed", String(n === active));
+    });
+    caption.textContent = buttons[active].dataset.caption;
+  }
+  controls.hidden = false;
+  buttons.forEach((button, index) => button.addEventListener("click", () => select(index)));
+  controls.addEventListener("keydown", event => {
+    if (!["ArrowLeft", "ArrowRight"].includes(event.key)) return;
+    event.preventDefault();
+    select(active + (event.key === "ArrowLeft" ? 1 : -1));
+    buttons[active].focus();
+  });
+  frame.addEventListener("touchstart", event => {
+    start = event.touches.length === 1 ? event.touches[0] : null;
+  }, {passive: true});
+  frame.addEventListener("touchcancel", () => { start = null; });
+  frame.addEventListener("touchend", event => {
+    if (!start) return;
+    const dx = event.changedTouches[0].clientX - start.clientX;
+    const dy = event.changedTouches[0].clientY - start.clientY;
+    start = null;
+    if (Math.abs(dx) > 45 && Math.abs(dx) > 1.5 * Math.abs(dy)) select(active + (dx > 0 ? 1 : -1));
+  }, {passive: true});
 })();

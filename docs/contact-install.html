@@ -1,91 +1,37 @@
 <!doctype html>
-<html lang="fa" dir="rtl">
-<head>
+<html lang="fa" dir="rtl"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="کاتالوگ مستر بیلیارد و ثبت درخواست مشاوره و نصب میز بیلیارد">
-<title>مستر بیلیارد | فروشگاه و نصب میز بیلیارد</title>
-<link rel="stylesheet" href="assets/site.css">
-<link rel="stylesheet" href="assets/showcase.css">
-<script defer src="assets/showcase.js"></script>
-</head>
-<body>
-<div class="loading" hidden role="status" aria-label="در حال بارگذاری"><i class="game-ball eight" aria-hidden="true">8</i></div>
-<script>
-const loader = document.querySelector(".loading");
-loader.hidden = false;
-const hideLoader = () => {loader.hidden = true};
-window.addEventListener("load", hideLoader, {once:true});
-window.addEventListener("pageshow", hideLoader);
-setTimeout(hideLoader, 2500);
-</script>
-<header class="shell nav">
-<a class="brand" href="index.html"><span class="ball" aria-hidden="true">8</span><span>مستر بیلیارد<small lang="en" dir="ltr">MR. BILIARD</small></span></a>
-<nav aria-label="منوی اصلی"><a href="tables.html">میزهای بیلیارد</a><a href="accessories.html">سایر محصولات</a><a href="repairs.html">تعمیرات</a><a href="index.html#installation">راه‌های ارتباطی</a></nav>
-<span class="outline social" lang="en">Instagram</span>
-</header>
-<main>
-<section class="showcase" aria-label="مستر بیلیارد" data-showcase>
-  <div class="showcase-stage">
-    <article class="scene scene-table is-entering" id="scene-tables">
-      <div class="scene-art table-photo" aria-hidden="true"></div>
-      <div class="scene-copy">
-        <h1>مستر بیلیارد</h1>
-        <p>میزهای بیلیارد و اسنوکر را ببین و برای انتخاب میز مناسب فضای بازی‌ات مشاوره بگیر.</p>
-        <a class="button" href="tables.html">مشاهده میزها ←</a>
-      </div>
-    </article>
-    <article class="scene scene-gear" id="scene-gear" hidden>
-      <div class="scene-art gear-art" aria-hidden="true">
-        <div class="rack"><i class="sphere ball-nine"><b>9</b></i><i class="sphere ball-eight"><b>8</b></i><i class="sphere ball-three"><b>3</b></i></div>
-      </div>
-      <div class="scene-copy">
-        <h2>لوازم بازی</h2>
-        <p>برای انتخاب چوب، توپ و لوازم میز، کاتالوگ تجهیزات بازی را ببین.</p>
-        <a class="button" href="accessories.html">مشاهده لوازم ←</a>
-      </div>
-    </article>
-    <article class="scene scene-service" id="scene-repairs" hidden>
-      <div class="scene-art service-art" aria-hidden="true">
-        <div class="felt-detail"><i class="pocket-dot"></i><i class="shot-line"></i><i class="white-ball"></i><i class="shot-cue"></i></div>
-      </div>
-      <div class="scene-copy">
-        <h2>تعمیرات میز</h2>
-        <p>برای بررسی تراز میز، تعویض ماهوت یا تعمیر باند، مشکل میزت را با ما در میان بگذار.</p>
-        <a class="button" href="repairs.html">خدمات تعمیرات ←</a>
-      </div>
-    </article>
-  </div>
-  <div class="scene-controls" hidden aria-label="انتخاب نمای فروشگاه" role="group">
-    <button type="button" aria-controls="scene-tables" aria-pressed="true">میزها</button>
-    <button type="button" aria-controls="scene-gear" aria-pressed="false">لوازم بازی</button>
-    <button type="button" aria-controls="scene-repairs" aria-pressed="false">تعمیرات</button>
-  </div>
-</section>
-
-<section class="shell section" id="catalog">
-<h2>کاتالوگ فروشگاه</h2>
-<div class="departments"><a class="department" href="tables.html"><i class="game-ball amber" aria-hidden="true">1</i><b>میزهای بیلیارد و اسنوکر</b><span>←</span></a><a class="department" href="accessories.html"><i class="game-ball blue" aria-hidden="true">2</i><b>سایر محصولات</b><span>←</span></a></div>
-<nav class="filters" aria-label="دسته‌های محصولات">
-<a href="index.html#catalog" aria-current="true">همه محصولات</a>
-<a href="category-pool.html#catalog">میز بیلیارد</a><a href="category-snooker.html#catalog">میز اسنوکر</a><a href="category-accessories.html#catalog">لوازم بازی</a>
+<meta name="theme-color" content="#103d32">
+<meta name="description" content="مستر بیلیارد؛ انتخاب میز بیلیارد و اسنوکر، لوازم بازی و هماهنگی نصب و تعمیر میز.">
+<title>راه‌های ارتباطی | مستر بیلیارد</title>
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="showcase.css">
+<script defer src="showcase.js"></script>
+</head><body>
+<a class="skip" href="#main">رفتن به محتوای صفحه</a>
+<div class="loading" hidden aria-label="در حال بارگذاری" role="status"><i class="brand-ball" aria-hidden="true">8</i></div>
+<header class="mast"><div class="shell nav">
+<a class="brand" href="index.html"><i class="brand-ball" aria-hidden="true">8</i><span>مستر بیلیارد<small lang="en">MR. BILIARD</small></span></a>
+<nav aria-label="منوی اصلی">
+<a  href="tables.html">میزهای بیلیارد</a>
+<a  href="accessories.html">لوازم بازی</a>
+<a  href="repairs.html">تعمیرات</a>
+<a aria-current="page" href="contact.html">راه‌های ارتباطی</a>
 </nav>
-<div class="grid">
-
-<div class="empty"><p>هنوز محصولی در این بخش منتشر نشده است.</p></div>
+</div></header>
+<main id="main">
+<section class="shell inner-page contact-layout" id="installation">
+<div><a class="crumb" href="index.html">خانه</a><h1>راه‌های ارتباطی</h1>
+<p class="intro">موضوع درخواست و شمارهٔ تماس‌تان را بنویسید تا مدیر فروشگاه برای هماهنگی با شما تماس بگیرد.</p>
 
 </div>
-
-</section>
-<section class="shell repair-strip"><div><h2>تعمیرات میز بیلیارد</h2><p>هموار کردن سطح بازی، بررسی باندها و تعویض ماهوت</p></div><a class="outline" href="repairs.html">مشاهده خدمات تعمیرات ←</a></section>
-<section class="shell section install" id="installation">
-<div class="install-copy"><h2>راه‌های ارتباطی</h2><p>موضوع درخواست و شماره‌ات را بنویس تا برای هماهنگی با تو تماس بگیریم.</p></div>
-<div class="contact-column"><div class="panel"><p>پیش‌نمایش فرم تماس</p>
+<div class="panel"><h2>درخواست تماس</h2>
+<p class="demo">این فرم برای نمایش است. ارسال درخواست در نسخهٔ نمایشی غیرفعال است.</p>
 
 
 
 
-
-<div class="field"><label for="id_topic">موضوع درخواست:</label><select name="topic" id="id_topic">
+<div class="fields"><div class="field f-topic"><label for="id_topic">موضوع درخواست:</label><select name="topic" id="id_topic">
   <option value="install" selected>نصب و فروش میز</option>
 
   <option value="price">استعلام قیمت</option>
@@ -94,24 +40,10 @@ setTimeout(hideLoader, 2500);
 
   <option value="support">پشتیبانی</option>
 
-</select></div>
-
-<div class="field"><label for="id_name">نام و نام خانوادگی:</label><input type="text" name="name" autocomplete="name" maxlength="100" required id="id_name"></div>
-
-<div class="field"><label for="id_phone">شماره تماس:</label><input type="text" name="phone" autocomplete="tel" inputmode="tel" dir="ltr" maxlength="16" required id="id_phone"></div>
-
-<div class="field"><label for="id_email">ایمیل (اختیاری):</label><input type="email" name="email" autocomplete="email" dir="ltr" maxlength="254" id="id_email"></div>
-
-<div class="field"><label for="id_city">شهر (اختیاری):</label><input type="text" name="city" autocomplete="address-level2" maxlength="80" id="id_city"></div>
-
-<div class="field"><label for="id_details">پیام شما (اختیاری):</label><textarea name="details" cols="40" rows="3" maxlength="1500" id="id_details">
-</textarea></div>
-
-<button class="button" type="button" disabled title="ارسال در نسخهٔ نمایشی غیرفعال است">ثبت درخواست تماس ←</button>
+</select></div><div class="field f-name"><label for="id_name">نام و نام خانوادگی:</label><input type="text" name="name" autocomplete="name" maxlength="100" required id="id_name"></div><div class="field f-phone"><label for="id_phone">شماره تماس:</label><input type="text" name="phone" autocomplete="tel" inputmode="tel" dir="ltr" maxlength="16" required id="id_phone"></div><div class="field f-email"><label for="id_email">ایمیل (اختیاری):</label><input type="email" name="email" autocomplete="email" dir="ltr" maxlength="254" id="id_email"></div><div class="field f-city"><label for="id_city">شهر (اختیاری):</label><input type="text" name="city" autocomplete="address-level2" maxlength="80" id="id_city"></div><div class="field f-details"><label for="id_details">پیام شما (اختیاری):</label><textarea name="details" cols="40" rows="3" maxlength="1500" id="id_details">
+</textarea></div></div>
+<button class="button" type="submit" disabled>ثبت درخواست تماس</button>
 </div>
-</div>
-</section>
-</main>
-<footer class="shell footer"><a href="index.html">مستر بیلیارد</a><a href="https://www.instagram.com/arianhghni/" lang="en" dir="ltr">Deaigned by Arian</a></footer>
-</body>
-</html>
+</section></main>
+<footer class="shell footer"><span>مستر بیلیارد</span><a href="https://www.instagram.com/arianhghni/" lang="en" dir="ltr">Deaigned by Arian</a></footer>
+</body></html>
