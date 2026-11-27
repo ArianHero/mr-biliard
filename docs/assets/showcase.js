@@ -1,69 +1,131 @@
 (() => {
-  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const hero = document.querySelector("[data-showcase]");
+  "use strict";
+  const legacy = document.querySelector(".legacy-contact");
+  if (legacy && location.hash === "#installation") {
+    location.replace(legacy.href);
+    return;
+  }
 
-  if (hero) {
-    const stage = hero.querySelector(".showcase-stage");
-    const scenes = [...stage.querySelectorAll(".scene")];
-    const controls = hero.querySelector(".scene-controls");
-    const buttons = [...controls.querySelectorAll("button")];
-    let active = 0;
-    let touchStart;
-
-    function show(index) {
-      const next = (index + scenes.length) % scenes.length;
-      if (next === active) return;
-      scenes[active].hidden = true;
-      scenes[active].classList.remove("is-entering");
-      buttons[active].setAttribute("aria-pressed", "false");
-      active = next;
-      scenes[active].hidden = false;
-      scenes[active].classList.add("is-entering");
-      buttons[active].setAttribute("aria-pressed", "true");
+  const toggle = document.querySelector(".menutoggle");
+  const menu = document.getElementById("main-nav");
+  if (toggle && menu) {
+    const container = toggle.closest(".nav");
+    function setMenu(open) {
+      toggle.setAttribute("aria-expanded", String(open));
+      menu.classList.toggle("opened", open);
     }
-
-    controls.hidden = false;
-    buttons.forEach((button, index) => button.addEventListener("click", () => show(index)));
-    controls.addEventListener("keydown", event => {
-      if (!["ArrowLeft", "ArrowRight"].includes(event.key)) return;
-      event.preventDefault();
-      show(active + (event.key === "ArrowLeft" ? 1 : -1));
-      buttons[active].focus();
+    toggle.hidden = false;
+    container.classList.add("menu-ready");
+    toggle.addEventListener("click", () => setMenu(toggle.getAttribute("aria-expanded") !== "true"));
+    document.addEventListener("click", event => {
+      if (!container.contains(event.target)) setMenu(false);
     });
-    stage.addEventListener("touchstart", event => {
-      touchStart = event.touches.length === 1 ? event.touches[0] : null;
-    }, {passive:true});
-    stage.addEventListener("touchcancel", () => { touchStart = null; });
-    stage.addEventListener("touchend", event => {
-      if (!touchStart) return;
-      const dx = event.changedTouches[0].clientX - touchStart.clientX;
-      const dy = event.changedTouches[0].clientY - touchStart.clientY;
-      touchStart = null;
-      if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.5) show(active + (dx > 0 ? 1 : -1));
-    }, {passive:true});
-
-    stage.addEventListener("pointermove", event => {
-      if (event.pointerType !== "mouse" || reducedMotion.matches) return;
-      const bounds = stage.getBoundingClientRect();
-      const x = (event.clientX - bounds.left) / bounds.width - .5;
-      const y = (event.clientY - bounds.top) / bounds.height - .5;
-      hero.style.setProperty("--pointer-x", (x * 16) + "px");
-      hero.style.setProperty("--pointer-y", (y * 12) + "px");
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
+        setMenu(false);
+        toggle.focus();
+      }
     });
-    stage.addEventListener("pointerleave", () => {
-      hero.style.removeProperty("--pointer-x");
-      hero.style.removeProperty("--pointer-y");
+    matchMedia("(min-width:701px)").addEventListener("change", () => setMenu(false));
+  }
+
+  const gallery = document.querySelector("[data-gallery]");
+  if (gallery) {
+    const slides = Array.from(gallery.querySelectorAll(".slide"));
+    const motion = matchMedia("(prefers-reduced-motion: reduce)");
+    let active = 0;
+    let timer;
+    function rotate() {
+      slides[active].classList.remove("current");
+      slides[active].setAttribute("aria-hidden", "true");
+      active = (active + 1) % slides.length;
+      slides[active].classList.add("current");
+      slides[active].setAttribute("aria-hidden", "false");
+    }
+    function schedule() {
+      clearInterval(timer);
+      if (slides.length > 1 && !document.hidden && !motion.matches) {
+        timer = setInterval(rotate, 5000);
+      }
+    }
+    document.addEventListener("visibilitychange", schedule);
+    motion.addEventListener("change", schedule);
+    schedule();
+  }
+
+  const draft = document.querySelector("[data-draft]");
+  if (draft) {
+    const fields = [...draft.querySelectorAll(".field input,.field select,.field textarea")];
+    const phone = draft.querySelector('[name="phone"]');
+    const button = draft.querySelector("[data-copy]");
+    const output = draft.querySelector(".draft-output");
+    const feedback = draft.querySelector(".draft-feedback");
+    button.hidden = false;
+    draft.addEventListener("input", () => {
+      phone.setCustomValidity("");
+      output.hidden = true;
+      feedback.textContent = "";
+    });
+    button.addEventListener("click", async () => {
+      const digits = phone.value.replace(/[۰-۹]/g, ch => "۰۱۲۳۴۵۶۷۸۹".indexOf(ch))
+        .replace(/[٠-٩]/g, ch => "٠١٢٣٤٥٦٧٨٩".indexOf(ch)).replace(/[\s()-]/g, "");
+      phone.setCustomValidity(digits && !/^\+?[0-9]{8,15}$/.test(digits) ? "شماره تماس معتبر وارد کنید." : "");
+      for (const field of fields) if (!field.reportValidity()) return;
+      const lines = fields.filter(field => field.value.trim()).map(field => {
+        const value = field.tagName === "SELECT" ? field.selectedOptions[0].text : field.value.trim();
+        return field.labels[0].textContent + " " + value;
+      });
+      output.value = lines.join("\n");
+      try {
+        await navigator.clipboard.writeText(output.value);
+        feedback.textContent = "متن درخواست کپی شد.";
+      } catch {
+        output.hidden = false;
+        output.focus();
+        output.select();
+        feedback.textContent = "متن درخواست آماده است. متن انتخاب‌شده را کپی کنید.";
+      }
     });
   }
 
-  if ("IntersectionObserver" in window && !reducedMotion.matches) {
+  const viewer = document.querySelector("model-viewer");
+  if (viewer) {
+    const fallback = () => {
+      viewer.hidden = true;
+      document.querySelector("[data-model-controls]").hidden = true;
+      document.querySelector("[data-model-error]").hidden = false;
+    };
+    viewer.addEventListener("error", fallback, {once: true});
+    try {
+      const context = document.createElement("canvas").getContext("webgl2");
+      if (context) {
+        context.getExtension("WEBGL_lose_context")?.loseContext();
+        const module = document.createElement("script");
+        module.type = "module";
+        module.src = viewer.dataset.module;
+        module.onerror = fallback;
+        document.head.append(module);
+      } else {
+        fallback();
+      }
+    } catch {
+      fallback();
+    }
+  }
+
+  if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
     const observer = new IntersectionObserver(entries => {
       for (const entry of entries) {
-        if (!entry.isIntersecting) continue;
-        entry.target.classList.add("motion-reveal");
-        observer.unobserve(entry.target);
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+          observer.unobserve(entry.target);
+        }
       }
-    }, {threshold:.12});
-    document.querySelectorAll(".department, .card, .repair-strip, .repair-content dl").forEach(el => observer.observe(el));
+    }, {threshold: 0.06});
+    document.querySelectorAll(".table-feature,.equipment-feature,.service-title,.product-card,.availability").forEach(element => {
+      if (element.getBoundingClientRect().top < innerHeight) return;
+      element.classList.add("reveal-ready");
+      observer.observe(element);
+    });
   }
 })();

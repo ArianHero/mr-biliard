@@ -1,44 +1,60 @@
 <!doctype html>
 <html lang="fa" dir="rtl"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#103d32">
-<meta name="description" content="مستر بیلیارد؛ انتخاب میز بیلیارد و اسنوکر، لوازم بازی و هماهنگی نصب و تعمیر میز.">
-<title>مستر بیلیارد | میز، لوازم بازی و تعمیرات</title>
-<link rel="stylesheet" href="site.css">
-<link rel="stylesheet" href="showcase.css">
-<script defer src="showcase.js"></script>
-</head><body>
+<meta name="theme-color" content="#101e1a"><meta name="description" content="فروشگاه مستر بیلیارد؛ میزهای پول و اسنوکر، دیگر محصولات و هماهنگی نصب و تعمیرات.">
+<title>مستر بیلیارد | میز بیلیارد و اسنوکر</title>
+<link rel="icon" href="assets/rack.svg" type="image/svg+xml">
+<link rel="preload" href="assets/vazirmatn.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/site.css"><script defer src="assets/showcase.js"></script>
+</head><body class="billiard-club">
 <a class="skip" href="#main">رفتن به محتوای صفحه</a>
-<div class="loading" hidden aria-label="در حال بارگذاری" role="status"><i class="brand-ball" aria-hidden="true">8</i></div>
 <header class="mast"><div class="shell nav">
-<a class="brand" href="index.html"><i class="brand-ball" aria-hidden="true">8</i><span>مستر بیلیارد<small lang="en">MR. BILIARD</small></span></a>
-<nav aria-label="منوی اصلی">
-<a  href="tables.html">میزهای بیلیارد</a>
-<a  href="accessories.html">لوازم بازی</a>
-<a  href="repairs.html">تعمیرات</a>
-<a  href="contact.html">راه‌های ارتباطی</a>
+<a class="brand" href="index.html"><img src="assets/rack.svg" width="45" height="45" alt=""><span>مستر بیلیارد<small lang="en" dir="ltr">MR. BILIARD</small></span></a>
+<button type="button" class="menutoggle" aria-controls="main-nav" aria-expanded="false" hidden><span class="hamb" aria-hidden="true"></span>منو</button>
+<nav id="main-nav" aria-label="منوی اصلی">
+<a aria-current="page" href="index.html">خانه</a>
+<a  href="tables.html">میزها</a>
+<a  href="accessories.html">دیگر محصولات</a>
+<a  href="contact-repair.html">تعمیرات</a>
+
 </nav>
+<a class="contact-link"  href="contact.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M5 3h3l2 5-2 2c1.6 2.9 3.1 4.5 6 6l2-2 5 2v3c0 1.2-1 2-2 2C11 21 3 13 3 5c0-1.1.9-2 2-2Z"/></svg>
+تماس با ما</a>
+
 </div></header>
-<main id="main">
+<main id="main" tabindex="-1">
 
-<section class="shell hero">
-<div class="hero-copy"><h1>میز بیلیارد <br><em>و اسنوکر</em></h1>
-<p>از انتخاب میز مناسبِ فضای بازی تا هماهنگی نصب، مستر بیلیارد همراه شماست.</p>
-<a class="button" href="tables.html">مشاهدهٔ میزها</a></div>
-<figure class="gallery" data-gallery aria-label="گالری بیلیارد">
-<div class="gallery-frame">
-<img src="atelier.webp" alt="نمای نزدیک ماهوت یشمی، چوب و توپ‌های بیلیارد" width="1500" height="1000" fetchpriority="high">
-<img src="pool.jpg" alt="چیدمان توپ‌ها و چوب‌ها روی میز بیلیارد" width="1600" height="1067" hidden>
+<section class="hero cafe-hero" data-gallery aria-label="گالری بیلیارد">
+<div class="hero-photos">
+<figure class="slide current">
+<picture><source media="(max-width:700px)" srcset="assets/photos/cafe-hall-mobile.webp"><img src="assets/photos/cafe-hall.webp" srcset="assets/photos/cafe-hall-sm.webp 960w, assets/photos/cafe-hall.webp 1920w" sizes="100vw" width="1920" height="1280" alt="میز بیلیارد زیر چراغ‌های آویز در سالنی با دیوارهای چوبی" fetchpriority="high" decoding="async"></picture>
+</figure>
+<figure class="slide" aria-hidden="true"><img src="assets/photos/opening-rack.webp" srcset="assets/photos/opening-rack-sm.webp 640w, assets/photos/opening-rack.webp 1440w" sizes="100vw" alt="توپ‌های شماره‌دار پول روی ماهوت سبز" width="1440" height="960" loading="lazy" decoding="async">
+</figure>
+<figure class="slide" aria-hidden="true"><img src="assets/photos/cue-shot.webp" srcset="assets/photos/cue-shot-sm.webp 760w, assets/photos/cue-shot.webp 1680w" sizes="100vw" alt="بازیکن در حال نشانه‌گیری با چوب بیلیارد" width="1680" height="1120" loading="lazy" decoding="async">
+</figure>
 </div>
-<figcaption><span class="gallery-caption" aria-live="polite">جزئیات میز</span>
-<div class="gallery-controls" hidden><button type="button" aria-label="نمایش عکس جزئیات میز" aria-pressed="true" data-caption="جزئیات میز"></button><button type="button" aria-label="نمایش عکس چیدمان بازی" aria-pressed="false" data-caption="چیدمان بازی"></button></div></figcaption>
-</figure></section>
-
-<section class="shell routes" id="catalog" aria-label="لوازم و خدمات">
-<a class="route" href="accessories.html"><span class="route-art billiard-set" aria-hidden="true"><i></i><i></i><i></i></span><div><h2>لوازم بازی</h2><p>چوب، توپ و لوازم جانبی میز</p></div></a>
-<a class="route" href="repairs.html"><span class="route-art rail" aria-hidden="true"><i></i></span><div><h2>تعمیرات</h2><p>تعویض ماهوت، تراز میز و بررسی باندها</p></div></a>
+<div class="shell hero-inner"><div class="hero-copy">
+<h1>دنیای بیلیارد<br><em>و اسنوکر</em></h1>
+<p class="hero-desc">میز و چوب مناسب بازی‌تان را انتخاب کنید. برای نصب و تعمیر میز هم با ما در تماس باشید.</p>
+<div class="actions"><a class="btn gold" href="tables.html">مشاهدهٔ میزها</a><a class="text-action" href="accessories.html">دیگر محصولات</a></div>
+</div></div>
 </section>
+
+<section class="shell collection" id="catalog" aria-labelledby="collection-heading">
+<div class="section-heading ruled"><h2 id="collection-heading">مجموعهٔ مستر بیلیارد</h2><span aria-hidden="true"></span></div>
+<div class="collection-layout">
+<article class="table-feature"><img src="assets/table-room.webp" width="1280" height="854" alt="نمای کامل میز پول و ریل‌های دور میز" loading="lazy"><div class="table-feature-copy">
+<h3><a href="tables.html">میزهای بازی</a></h3><div class="game-choices"><a href="category-pool.html">میزهای پول</a><a href="category-snooker.html">میزهای اسنوکر</a></div></div></article>
+<div class="equipment-feature"><figure><img src="assets/photos/cue-and-balls.webp" srcset="assets/photos/cue-and-balls-sm.webp 440w, assets/photos/cue-and-balls.webp 840w" sizes="(max-width:700px) 92vw, 32vw" alt="چوب و توپ‌های بیلیارد روی میز" width="840" height="1260" loading="lazy" decoding="async">
+</figure>
+<div><h3><a href="accessories.html">دیگر محصولات</a></h3><p>چوب، توپ و لوازم جانبی میز</p><a class="line-link" href="accessories.html">مشاهدهٔ دیگر محصولات</a></div></div></div>
+</section>
+<section class="service-band"><div class="shell service-inner"><div class="service-title"><span class="route-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="m4 20 7-7m2-7a5 5 0 0 0 6 6l2-2-4-1-1-4 2-2a5 5 0 0 0-5 3Z"/></svg>
+</span><div><h2>خدمات میز بیلیارد</h2><p>هماهنگی نصب، تعویض ماهوت و تعمیر میز</p></div></div>
+<div class="service-links"><a class="btn gold" href="contact-repair.html">تعمیرات</a><a class="text-action" href="contact-install.html">هماهنگی نصب</a></div></div></section>
 <a class="legacy-contact" id="installation" href="contact.html">رفتن به فرم تماس</a>
 </main>
-<footer class="shell footer"><span>مستر بیلیارد</span><a href="https://www.instagram.com/arianhghni/" lang="en" dir="ltr">Deaigned by Arian</a></footer>
+<footer><div class="shell foot"><a class="brand" href="index.html"><img src="assets/rack.svg" width="36" height="36" alt=""><span>مستر بیلیارد</span></a>
+<a href="contact.html">راه‌های ارتباطی</a><a class="credit" href="https://www.instagram.com/arianhghni/" lang="en" dir="ltr">Designed by Arian</a></div></footer>
 </body></html>
